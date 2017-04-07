@@ -1,7 +1,0 @@
-graph prova{
-	"Node #1" -- "Node #3" [weight=1];
-	"Node #3" -- "Node #5" [weight=1];
-	"Node #5" -- "Node #2" [weight=1];
-	"Node #5" -- "Node #4" [weight=1];
-	"Node #2" -- "Node #4" [weight=1];
-}

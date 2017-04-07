@@ -1,21 +1,18 @@
 class Graph
-  attr_accessor :nodes, :edges, :name
-  attr_writer :directed
+  attr_accessor :nodes, 
+                :edges, 
+                :name, 
+                :directed,
+                :weighted
   
-  Directed=true
-  NotDirected=false
-  
-  def initialize(name,directed)
+  def initialize(name)
     @nodes = []
     @edges = []
     @name = name
-    @directed = directed
+    @directed = false
+    @weighted = false
   end
   
-  def is_directed?
-    return @directed
-  end
-
   def add_node(node)
     nodes << node
     node.graph = self
@@ -33,7 +30,7 @@ class Graph
   end
   
   def to_s
-    ret = "#{"di" if self.is_directed?}graph #{self.name}{\n"
+    ret = "#{"di" if self.directed}graph #{self.name}{\n"
     self.edges.each { |edge|
       ret+="\t#{edge}\n"
     }
