@@ -5,12 +5,14 @@ class Graph
                 :weighted,
                 :directed
 
-  def initialize(name)
-    @nodes = []
-    @edges = []
+  def initialize(name, nodes=[], edges=[], weighted=false, directed=false)
     @name = name
-    @weighted = false
+    @nodes = nodes
+    @edges = edges
+    @weighted = weighted
+    @directed = directed
   end
+  
 
   def add_node(node)
     nodes << node
@@ -20,6 +22,10 @@ class Graph
   def add_edge(edge)
     edges << edge
     edge.graph = self
+  end
+
+  def find_node(name)
+    return nodes.select{ |n| n.name == name }.first
   end
 
   def reverse!
@@ -35,5 +41,31 @@ class Graph
     }
     ret+='}'
     return ret
+  end
+  
+  def self.new_from_dot(dot_string)
+    gdot = GraphViz.parse_string(dot_string)
+    
+    g = Graph.new(gdot.name)
+    
+    gdot.each_node do |name, node|
+      g.add_node(Node.new(name))
+    end
+
+    gdot.each_edge do |edge|
+      tail = g.find_node(edge.tail_node(true,false))
+      head = g.find_node(edge.head_node(true,false))
+      g.add_edge(Edge.new(tail, head, edge["weight"]))
+    end
+    
+    if (g.edges.empty?)
+      g.weighted = false
+    else
+      g.weighted = !g.edges.first.weight.nil?
+    end
+    
+    g.directed = (gdot.type == "digraph")
+    
+    return g
   end
 end
