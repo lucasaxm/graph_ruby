@@ -20,13 +20,14 @@ class Node
   def degree
     self.adjacents.size
   end
-
-  def outdegree
-
-  end
-
+  
   def indegree
-
+    graph.edges.select{|e| e.to == self}.map(&:to).size
+  end
+  
+  def outdegree
+    self.degree
   end
 
+  
 end
