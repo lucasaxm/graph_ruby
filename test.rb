@@ -1,4 +1,6 @@
-require "graphviz"
+# require_relative "ruby-graphviz-1.2.3/lib/graphviz"
+require 'graphviz'
+# require "pry"
 
 require_relative 'graph'
 require_relative 'node'
@@ -8,6 +10,7 @@ require_relative 'edge'
 
 # puts 'input:'
 # puts input
+# binding.pry
 if (true)
     graph = Graph.new_from_dot(ARGF.read)
 else

@@ -49,20 +49,20 @@ class GraphViz
       end
 
       def []=( key, value )
-         unless @attributes.keys.include?( key.to_s )
-            raise ArgumentError, "#{@name} attribute '#{key.to_s}' invalid"
-         end
+         # unless @attributes.keys.include?( key.to_s )
+         #    raise ArgumentError, "#{@name} attribute '#{key.to_s}' invalid"
+         # end
 
-         if value.nil?
-            warn "Value for attribute `#{key}` can't be null"
-            return
-         end
+         # if value.nil?
+         #    warn "Value for attribute `#{key}` can't be null"
+         #    return
+         # end
 
-         begin
-            value = GraphViz::Types.const_get(@attributes[key.to_s]).new(value)
-         rescue => e
-            raise AttributeException, "Invalid value `#{value}` for attribute `#{key}` : #{e}"
-         end
+         # begin
+         #    value = GraphViz::Types.const_get(@attributes[key.to_s]).new(value)
+         # rescue => e
+         #    raise AttributeException, "Invalid value `#{value}` for attribute `#{key}` : #{e}"
+         # end
 
          if value
            @data[key.to_s] = value
