@@ -1,5 +1,5 @@
-# require_relative "ruby-graphviz-1.2.3/lib/graphviz"
-require 'graphviz'
+require_relative "ruby-graphviz-1.2.3/lib/graphviz"
+# require_relative 'graphviz'
 # require "pry"
 
 require_relative 'graph'

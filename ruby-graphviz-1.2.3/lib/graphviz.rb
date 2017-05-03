@@ -20,17 +20,17 @@ IS_CYGWIN = ((RUBY_PLATFORM =~ /cygwin/) != nil)
 
 require 'tempfile'
 
-require 'graphviz/utils'
-require 'graphviz/node'
-require 'graphviz/edge'
-require 'graphviz/attrs'
-require 'graphviz/constants'
-require 'graphviz/elements'
-require 'graphviz/dot_script'
+require_relative 'graphviz/utils'
+require_relative 'graphviz/node'
+require_relative 'graphviz/edge'
+require_relative 'graphviz/attrs'
+require_relative 'graphviz/constants'
+require_relative 'graphviz/elements'
+require_relative 'graphviz/dot_script'
 
-require 'graphviz/dot2ruby'
-require 'graphviz/types'
-require 'graphviz/core_ext'
+require_relative 'graphviz/dot2ruby'
+require_relative 'graphviz/types'
+require_relative 'graphviz/core_ext'
 
 if /^1.8/.match RUBY_VERSION
   $KCODE = "UTF8"

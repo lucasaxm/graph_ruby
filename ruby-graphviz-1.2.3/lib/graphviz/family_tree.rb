@@ -2,16 +2,16 @@
 
 require 'rubygems'
 require 'graphviz'
-require 'graphviz/family_tree/generation'
-require 'graphviz/family_tree/person'
-require 'graphviz/family_tree/couple'
-require 'graphviz/family_tree/sibling'
+require_relative 'family_tree/generation'
+require_relative 'family_tree/person'
+require_relative 'family_tree/couple'
+require_relative 'family_tree/sibling'
 
 class GraphViz
   class FamilyTree
     # Create a new family tree
     #
-    #   require 'graphviz/family_tree'
+    #   require_relative 'family_tree'
     #   t = GraphViz::FamilyTree.new do
     #     ...
     #   end
@@ -27,7 +27,7 @@ class GraphViz
 
     # Add a new generation in the tree
     #
-    #   require 'graphviz/family_tree'
+    #   require_relative 'family_tree'
     #   t = GraphViz::FamilyTree.new do
     #     generation do
     #       ...

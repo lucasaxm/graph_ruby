@@ -1,4 +1,4 @@
-require 'graphviz/core_ext'
+require_relative '../core_ext'
 
 class GraphViz
    module Utils
