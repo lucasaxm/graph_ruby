@@ -1,4 +1,4 @@
-require_relative 'math/matrix'
+require 'graphviz/math/matrix'
 
 class GraphViz
    class Theory

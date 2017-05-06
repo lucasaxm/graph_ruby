@@ -1,4 +1,4 @@
-require_relative '../utils/colors'
+require 'graphviz/utils/colors'
 
 class ColorException < RuntimeError
 end

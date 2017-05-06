@@ -1,3 +1,4 @@
+require 'pry'
 # Copyright (C) 2004 - 2012 Gregoire Lejeune <gregoire.lejeune@free.fr>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -53,16 +54,17 @@ class GraphViz
          #    raise ArgumentError, "#{@name} attribute '#{key.to_s}' invalid"
          # end
 
-         # if value.nil?
-         #    warn "Value for attribute `#{key}` can't be null"
-         #    return
-         # end
-
-         # begin
-         #    value = GraphViz::Types.const_get(@attributes[key.to_s]).new(value)
-         # rescue => e
-         #    raise AttributeException, "Invalid value `#{value}` for attribute `#{key}` : #{e}"
-         # end
+         if value.nil?
+            warn "Value for attribute `#{key}` can't be null"
+            return
+         end
+         # binding.pry
+         begin
+            @attributes[key.to_s]=:String if @attributes[key.to_s].nil?
+            value = GraphViz::Types.const_get(@attributes[key.to_s]).new(value)
+         rescue => e
+            raise AttributeException, "Invalid value `#{value}` for attribute `#{key}` : #{e}"
+         end
 
          if value
            @data[key.to_s] = value

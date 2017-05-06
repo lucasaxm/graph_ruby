@@ -15,8 +15,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
-require_relative 'ext'
-require_relative 'utils'
+require 'graphviz/ext'
+require 'graphviz/utils'
 
 class Dot2Ruby #:nodoc:
   include GraphViz::Utils
@@ -29,7 +29,7 @@ class Dot2Ruby #:nodoc:
     end
     @xOutFile = xOutFile
     @xOutFormat = xOutFormat || "_"
-    @gvprScript = GraphViz::Ext.find( "lib/ext/gvpr/dot2ruby.g" )
+    @gvprScript = GraphViz::Ext.find( "dot2ruby.g" )
   end
 
   def run( xFile ) #:nodoc:

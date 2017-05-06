@@ -44,15 +44,20 @@ class Graph
   end
   
   def self.new_from_dot(dot_string)
-    gdot = GraphViz.parse_string(dot_string)
+    gviz = GraphViz.parse_string(dot_string)
     
-    g = Graph.new(gdot.name)
+    return gviz2graph(gviz)
+  end
+
+  def self.gviz2graph(gviz)
+    g = Graph.new(gviz.name)
     
-    gdot.each_node do |name, node|
+    gviz.each_node do |name, node|
+      binding.pry
       g.add_node(Node.new(name))
     end
 
-    gdot.each_edge do |edge|
+    gviz.each_edge do |edge|
       tail = g.find_node(edge.tail_node(true,false))
       head = g.find_node(edge.head_node(true,false))
       g.add_edge(Edge.new(tail, head, edge["weight"]))
@@ -64,8 +69,9 @@ class Graph
       g.weighted = !g.edges.first.weight.nil?
     end
     
-    g.directed = (gdot.type == "digraph")
+    g.directed = (gviz.type == "digraph")
     
     return g
   end
+
 end
