@@ -53,3 +53,5 @@ puts "graph.nodes.first.name: "+graph.nodes.first.name.to_s
 puts "graph.nodes.first.degree: "+graph.nodes.first.degree.to_s
 puts "graph.nodes.first.indegree: "+graph.nodes.first.indegree.to_s
 puts "graph.nodes.first.outdegree: "+graph.nodes.first.outdegree.to_s
+puts "graph.nodes.first.attrs: "+graph.nodes.first.attrs.to_s
+puts "graph.to_s: "+graph.to_s

@@ -1,15 +1,14 @@
 class Graph
-  attr_accessor :nodes,
-                :edges,
-                :name,
-                :weighted,
+  attr_accessor :name,
                 :directed
 
-  def initialize(name, nodes=[], edges=[], weighted=false, directed=false)
+  attr_reader   :nodes,
+                :edges
+
+  def initialize(name, nodes=[], edges=[], directed=false)
     @name = name
     @nodes = nodes
     @edges = edges
-    @weighted = weighted
     @directed = directed
   end
   
@@ -35,12 +34,26 @@ class Graph
   end
 
   def to_s
-    ret = "#{'di' if self.directed}graph #{self.name}{\n"
+    ret = "#{'di' if self.directed}graph #{self.name}{\n\n"
+    self.nodes.each { |node|
+      ret+="\t#{node};\n"
+    }
+    ret+="\n"
     self.edges.each { |edge|
-      ret+="\t#{edge}\n"
+      ret+="\t#{edge};\n"
     }
     ret+='}'
     return ret
+  end
+
+  def weighted
+    if self.edges.empty?
+      return false
+    elsif self.edges.first["peso"].nil?
+      return false
+    else
+      return true
+    end
   end
   
   def self.new_from_dot(dot_string)
@@ -53,20 +66,25 @@ class Graph
     g = Graph.new(gviz.name)
     
     gviz.each_node do |name, node|
-      binding.pry
-      g.add_node(Node.new(name))
+      new_node = Node.new(name)
+      node.each_attribute do |attr|
+        if attr!="label" && !node[attr].empty?
+          new_node[attr]=node[attr];
+        end
+      end
+      g.add_node(new_node)
     end
 
     gviz.each_edge do |edge|
       tail = g.find_node(edge.tail_node(true,false))
       head = g.find_node(edge.head_node(true,false))
-      g.add_edge(Edge.new(tail, head, edge["weight"]))
-    end
-    
-    if (g.edges.empty?)
-      g.weighted = false
-    else
-      g.weighted = !g.edges.first.weight.nil?
+      new_edge = Edge.new(tail, head)
+      edge.each_attribute do |attr|
+        if !edge[attr].empty?
+          new_edge[attr]=edge[attr];
+        end
+      end
+      g.add_edge(new_edge)
     end
     
     g.directed = (gviz.type == "digraph")
