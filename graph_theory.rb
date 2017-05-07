@@ -13,7 +13,6 @@ class GraphTheory
 	end
 
 	def pathes_to_sinks
-		# binding.pry
 		# copy of the graph with edges reversed so the sinks becomes sources and vice versa.
 		gr = @graph.clone.reverse!
 		# copy of the source graph with no modifications, will be the resultant graph.

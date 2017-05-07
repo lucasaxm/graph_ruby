@@ -41,7 +41,7 @@ class Node
   end
 
   def to_s
-    ret=self.name
+    ret="\"#{self.name}\""
 
     if !self.attrs.empty?
       ret+=" ["
