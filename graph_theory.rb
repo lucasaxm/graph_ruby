@@ -1,7 +1,3 @@
-require 'benchmark'
-
-require_relative 'my_queue'
-
 class GraphTheory
 
 	def initialize(graph)
