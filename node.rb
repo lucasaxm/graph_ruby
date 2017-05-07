@@ -18,13 +18,13 @@ class Node
       return
     end
 
-    if (value.class != String) || (key.class != String)
-      warn "Key and Value must be a String."
+    if key.class != String
+      warn "Key must be a String."
       return
     end
 
-    if value.empty? || key.empty?
-      warn "Value and Key can't be empty."
+    if (defined?(value.empty?) && value.empty?) || key.empty?
+      warn "Value and Key can't be empty (if string)."
       return
     end
 
@@ -48,7 +48,7 @@ class Node
       self.attrs.each_with_index do |(key,value),index|
         ret+="#{key}=#{value}"
         if index!=self.attrs.size-1
-          ret+=" "
+          ret+=", "
         else
           ret+="]"
         end

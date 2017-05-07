@@ -28,9 +28,10 @@ class Graph
   end
 
   def reverse!
-    edges.each do |e|
+    self.edges.each do |e|
       e.from, e.to = e.to, e.from
     end
+    self
   end
 
   def to_s
@@ -90,6 +91,18 @@ class Graph
     g.directed = (gviz.type == "digraph")
     
     return g
+  end
+
+  def clone
+    Marshal.load(Marshal.dump(self))
+  end
+
+  def sinks
+    self.nodes.select{ |n| n.outdegree==0 }
+  end
+
+  def sources
+    self.nodes.select{ |n| n.indegree==0 }
   end
 
 end

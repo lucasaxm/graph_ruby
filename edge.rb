@@ -22,7 +22,7 @@ class Edge
       self.attrs.each_with_index do |(key,value),index|
         ret+="#{key}=#{value}"
         if index!=self.attrs.size-1
-          ret+=" "
+          ret+=", "
         else
           ret+="]"
         end
@@ -43,8 +43,8 @@ class Edge
       return
     end
 
-    if (value.class != String) || (key.class != String)
-      warn "Key and Value must be a String."
+    if key.class != String
+      warn "Key must be a String."
       return
     end
 
