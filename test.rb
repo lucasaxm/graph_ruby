@@ -13,8 +13,7 @@ require_relative 'graph_theory'
 
 # puts 'input:'
 # puts input
-# binding.pry
-case 3
+case 1
     when 1
         graph = Graph.new_from_dot(ARGF.read)
     when 2
@@ -39,7 +38,7 @@ case 3
           puts "error writing graph"
         end
     when 3
-        graph = Graph.gviz2graph(GraphViz.parse( "test.dot", :path => "." ))
+        graph = Graph.gviz2graph(GraphViz.parse( "dots/t2.dot", :path => "." ))
 end
 gt = GraphTheory.new(graph)
 puts "graph.name: "+graph.name.to_s
@@ -57,5 +56,4 @@ puts "graph.nodes.first.indegree: "+graph.nodes.first.indegree.to_s
 puts "graph.nodes.first.outdegree: "+graph.nodes.first.outdegree.to_s
 puts "graph.nodes.first.attrs: "+graph.nodes.first.attrs.to_s
 puts "graph.to_s: "+graph.to_s
-binding.pry
 puts "gt.pathes_to_sinks: "+ gt.pathes_to_sinks.to_s
