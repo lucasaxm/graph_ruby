@@ -1,3 +1,8 @@
+$:.unshift File.expand_path("../gem/Ruby-Graphviz-master/lib", __FILE__)
+require 'graphviz'
+require_relative 'node'
+require_relative 'edge'
+
 class Graph
   attr_accessor :name,
                 :directed
@@ -46,16 +51,6 @@ class Graph
     ret+='}'
     return ret
   end
-
-  def weighted
-    if self.edges.empty?
-      return false
-    elsif self.edges.first["peso"].nil?
-      return false
-    else
-      return true
-    end
-  end
   
   def self.new_from_dot(dot_string)
     gviz = GraphViz.parse_string(dot_string)
@@ -69,11 +64,12 @@ class Graph
     gviz.each_node do |name, node|
       new_node = Node.new(name)
       node.each_attribute do |attr|
-        if attr!="label" && !node[attr].empty?
+        unless attr=="label" || (defined?(node[attr].empty?) && node[attr].empty?)
           new_node[attr]=node[attr];
         end
       end
       g.add_node(new_node)
+      # puts "DEBUG | #{new_node.to_s}" # debug
     end
 
     gviz.each_edge do |edge|
@@ -86,6 +82,7 @@ class Graph
         end
       end
       g.add_edge(new_edge)
+      # puts "DEBUG | #{new_edge.to_s}" # debug
     end
     
     g.directed = (gviz.type == "digraph")

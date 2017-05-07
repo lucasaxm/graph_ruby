@@ -1,3 +1,5 @@
+require 'benchmark'
+
 require_relative 'my_queue'
 
 class GraphTheory
@@ -11,16 +13,18 @@ class GraphTheory
 	end
 
 	def pathes_to_sinks
+		# binding.pry
 		# copy of the graph with edges reversed so the sinks becomes sources and vice versa.
 		gr = @graph.clone.reverse!
 		# copy of the source graph with no modifications, will be the resultant graph.
 		g = @graph.clone
 		# iterates through all nodes from the reversed graph
 		gtr = GraphTheory.new(gr)
-		gr.sources.each do |n|	
+		gr.sources.each do |n|
 			# calculate the the number of paths from the source nodes to every other node
 			# iterates through all nodes checking if they have a path to n
-			gtr.all_paths(n).nodes.each do |n2|	
+			g_with_paths = gtr.all_paths(n)
+			g_with_paths.nodes.each do |n2|	
 				unless (n2["paths"]==0) || (n.name==n2.name)
 					true_n = g.find_node(n2.name)
 					# if they have, iterates through all the attributes of n and increment the
@@ -37,6 +41,7 @@ class GraphTheory
 	end
 
 	def all_paths(r)
+		# start = Time.now # debug
 		g = @graph.clone
 		v = g.find_node(r.name)
 		g.nodes.map { |n|
@@ -44,6 +49,8 @@ class GraphTheory
 			n["paths"]=0
 		}
 		depth_first_search_node(g,v)
+		# finish = Time.now # debug
+		# puts "DEBUG | #{r.name} | #{finish-start}" # debug
 		return g
 	end
 
