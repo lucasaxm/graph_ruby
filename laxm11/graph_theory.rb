@@ -8,7 +8,7 @@ class GraphTheory
 		@graph.clone
 	end
 
-	def pathes_to_sinks
+	def paths_to_sinks
 		# copy of the graph with edges reversed so the sinks becomes sources and vice versa.
 		gr = @graph.clone.reverse!
 		# copy of the source graph with no modifications, will be the resultant graph.
