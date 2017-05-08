@@ -1,0 +1,8 @@
+digraph "emacs24" {
+	"emacs24" -> "libgtk-3-0" ;
+	"libgtk-3-bin" -> "libgtk-3-common" ;
+	"libgtk-3-bin" -> "libgtk-3-0" ;
+	"adwaita-icon-theme" -> "libgtk-3-bin" ;
+	"libgtk-3-common" -> "adwaita-icon-theme" ;
+	"libgtk-3-0" -> "libgtk-3-common" ;
+}

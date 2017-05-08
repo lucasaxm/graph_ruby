@@ -1,4 +1,3 @@
-require 'pry'
 # Copyright (C) 2004 - 2012 Gregoire Lejeune <gregoire.lejeune@free.fr>
 #
 # This program is free software; you can redistribute it and/or modify
