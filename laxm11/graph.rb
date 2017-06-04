@@ -1,5 +1,6 @@
 $:.unshift File.expand_path("../gem/Ruby-Graphviz-master/lib", __FILE__)
 require 'graphviz'
+require 'pry'
 require_relative 'node'
 require_relative 'edge'
 
@@ -21,11 +22,13 @@ class Graph
   def add_node(node)
     nodes << node
     node.graph = self
+    node
   end
 
   def add_edge(edge)
     edges << edge
     edge.graph = self
+    edge
   end
 
   def find_node(name)
@@ -73,8 +76,17 @@ class Graph
     end
 
     gviz.each_edge do |edge|
-      tail = g.find_node(edge.tail_node(true,false))
-      head = g.find_node(edge.head_node(true,false))
+      tail_node_name = edge.tail_node(true,false)
+      tail = g.find_node(tail_node_name)
+      if tail.nil?
+        tail = g.add_node(Node.new(tail_node_name))
+      end
+      
+      head_node_name = edge.head_node(true,false)
+      head = g.find_node(head_node_name)
+      if head.nil?
+        head = g.add_node(Node.new(head_node_name))
+      end
       new_edge = Edge.new(tail, head)
       edge.each_attribute do |attr|
         if !edge[attr].empty?
