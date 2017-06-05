@@ -44,9 +44,21 @@ class Graph
 
   def to_s
     ret = "#{'di' if self.directed}graph #{self.name}{\n\n"
-    self.nodes.each { |node|
-      ret+="\t#{node};\n"
-    }
+    if self.nodes.first["cluster"].nil?
+      self.nodes.each { |node|
+        ret+="\t#{node};\n"
+      }
+    else
+      cluster_count=1
+      while !(subgraph=self.nodes.select{|x| x["cluster"]==cluster_count}).empty?
+        ret+="\tsubgraph cluster#{cluster_count} {\n"
+        subgraph.each { |node|
+          ret+="\t\t#{node};\n"
+        }
+        ret+="\t}\n"
+        cluster_count+=1
+      end
+    end
     ret+="\n"
     self.edges.each { |edge|
       ret+="\t#{edge};\n"

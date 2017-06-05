@@ -42,19 +42,17 @@ class Node
 
   def to_s
     ret="\"#{self.name}\""
-
-    if !self.attrs.empty?
+    attributes=self.attrs.select{|x| x != "cluster"}
+    unless attributes.empty?
       ret+=" ["
-
-      self.attrs.each_with_index do |(key,value),index|
+      attributes.each_with_index do |(key,value),index|
         ret+="#{key}=#{value}"
-        if index!=self.attrs.size-1
+        if index!=attributes.size-1
           ret+=", "
         else
           ret+="]"
         end
       end
-
     end
     
     ret
