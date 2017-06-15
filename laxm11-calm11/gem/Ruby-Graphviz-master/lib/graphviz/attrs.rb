@@ -57,7 +57,6 @@ class GraphViz
             warn "Value for attribute `#{key}` can't be null"
             return
          end
-         # binding.pry
          begin
             @attributes[key.to_s]=:String if @attributes[key.to_s].nil?
             value = GraphViz::Types.const_get(@attributes[key.to_s]).new(value)

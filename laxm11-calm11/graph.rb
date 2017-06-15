@@ -1,6 +1,5 @@
 $:.unshift File.expand_path("../gem/Ruby-Graphviz-master/lib", __FILE__)
 require 'graphviz'
-require 'pry'
 require_relative 'node'
 require_relative 'edge'
 

@@ -33,7 +33,6 @@ class Node
 
   def adjacents
     if graph.directed
-      # binding.pry
       graph.edges.select{|e| e.from == self}.map(&:to)
     else
       graph.edges.select{|e| e.from == self || e.to == self}.map(&:to)
