@@ -1,0 +1,14 @@
+strict digraph G {
+  X [X=1];
+  Y [O=1];
+  Z [E=1];
+
+  A -> B;
+  A -> C;
+  B -> X;
+  B -> Y;
+  B -> Z;
+  C -> Y;
+  C -> Z;
+}
+  

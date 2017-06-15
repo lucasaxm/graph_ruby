@@ -1,0 +1,6 @@
+    "A" [FIM=3,OUTRO=2]
+    "B" [FIM=2,OUTRO=1]
+    "C" [FIM=1,OUTRO=1]
+    "X" [FIM=1]
+    "Y" [FIM=1]
+    "Z" [OUTRO=1]
