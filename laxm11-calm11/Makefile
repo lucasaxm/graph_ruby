@@ -1,0 +1,2 @@
+exec:
+	chmod +x fortes

@@ -56,19 +56,6 @@ class GraphTheory
 		end
 	end
 	
-	# def dfs
-	# 	g = @graph.clone
-	# 	g.nodes.map { |n|
-	# 		n["state"]=0
-	# 	}
-	# 	g.nodes.each { |n|
-	# 		if n["state"]==0
-	# 			dfs_util(n)
-	# 		end
-	# 	}
-	# end
-	
-	
 	def strongly_connected_components
 		# copy of the source graph with no modifications, will be the resultant graph.
 		g_result = @graph.clone
@@ -79,14 +66,23 @@ class GraphTheory
 		# copy of the graph with edges reversed.
 		gr = g.clone.reverse!
 		cluster_count=1
+		# iterates through all nodes
 		g_result.nodes.each do |n|
+			# check if n doesn't belong to any cluster yet
 			if n["cluster"].nil?
+				# get the object for n in g
 				r = g.find_node(n.name)
+				# get the object for n in gr
 				rr = gr.find_node(n.name)
+				# get all nodes reachable by n in g
 				vr = scc_util(r)
+				# get all nodes reachable by n in gr
 				vrr = scc_util(rr)
+				# gets the intersection of nodes reachable by n in g and gr
 				intersection = vr.map{ |x| x.name } & vrr.map{ |x| x.name }
 				unless intersection.empty?
+					# everyone on the intersection belongs to the same cluster
+					# so they have their cluster number on the cluster attr
 					intersection.each do |name|
 						g_result.find_node(name)["cluster"] = cluster_count
 					end
